@@ -169,140 +169,277 @@
 <div class="divider"></div>
 
 <!-- ================= PLAYOFFS ================= -->
-<section class="playoffs-section">
-    <h2 class="section-title">Playoffs</h2>
+    <section class="playoffs-section">
+        <h2 class="section-title">Playoffs</h2>
 
-    <!-- ---- UPPER BRACKET ---- -->
-    <div class="bracket-label">
-        <span class="bracket-line bracket-line--primary"></span>
-        <span class="bracket-label-text bracket-label-text--primary">Upper Bracket</span>
-    </div>
-
-    <div class="bracket-container">
-        <!-- UB Semifinales -->
-        <div class="bracket-round">
-            <div class="round-header">Semifinal</div>
-            <div class="match-box">
-                <div class="match-team">
-                    <span class="team-name">Team 1</span>
-                    <span class="team-score">-</span>
-                </div>
-                <div class="match-team">
-                    <span class="team-name">Team 8</span>
-                    <span class="team-score">-</span>
-                </div>
-            </div>
-            <div class="match-box">
-                <div class="match-team">
-                    <span class="team-name">Team 4</span>
-                    <span class="team-score">-</span>
-                </div>
-                <div class="match-team">
-                    <span class="team-name">Team 5</span>
-                    <span class="team-score">-</span>
-                </div>
-            </div>
+        <!-- ---- UPPER BRACKET ---- -->
+        <div class="bracket-label">
+            <span class="bracket-line bracket-line--primary"></span>
+            <span class="bracket-label-text bracket-label-text--primary">Upper Bracket</span>
         </div>
 
-        <!-- Connector SF -> UB Final -->
-        <div class="connector">
-            <svg width="40" height="200" viewBox="0 0 40 200">
-                <path d="M0 50 H20 V100 H40" stroke="#334155" stroke-width="2" fill="none"/>
-                <path d="M0 150 H20 V100 H40" stroke="#334155" stroke-width="2" fill="none"/>
+        <div class="upper-bracket">
+            <!-- UB Cuartos (Columna 1) -->
+            <div class="ub-col ub-col-qf">
+                <div class="round-header">UB Cuartos</div>
+                <div class="ub-qf-matches">
+                    <div class="match-box" id="ub-qf1">
+                        <div class="match-team"><span class="team-name">Team 1</span><span class="team-score">-</span></div>
+                        <div class="match-team"><span class="team-name">Team 8</span><span class="team-score">-</span></div>
+                    </div>
+                    <div class="match-box" id="ub-qf2">
+                        <div class="match-team"><span class="team-name">Team 2</span><span class="team-score">-</span></div>
+                        <div class="match-team"><span class="team-name">Team 7</span><span class="team-score">-</span></div>
+                    </div>
+                    <div class="match-box" id="ub-qf3">
+                        <div class="match-team"><span class="team-name">Team 3</span><span class="team-score">-</span></div>
+                        <div class="match-team"><span class="team-name">Team 6</span><span class="team-score">-</span></div>
+                    </div>
+                    <div class="match-box" id="ub-qf4">
+                        <div class="match-team"><span class="team-name">Team 4</span><span class="team-score">-</span></div>
+                        <div class="match-team"><span class="team-name">Team 5</span><span class="team-score">-</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- UB Semifinal (Columna 2) -->
+            <div class="ub-col ub-col-sf">
+                <div class="round-header">UB Semifinal</div>
+                <div class="ub-sf-matches">
+                    <div class="match-box" id="ub-sf1">
+                        <div class="match-team"><span class="team-name">Gan. QF1</span><span class="team-score">-</span></div>
+                        <div class="match-team"><span class="team-name">Gan. QF2</span><span class="team-score">-</span></div>
+                    </div>
+                    <div class="match-box" id="ub-sf2">
+                        <div class="match-team"><span class="team-name">Gan. QF3</span><span class="team-score">-</span></div>
+                        <div class="match-team"><span class="team-name">Gan. QF4</span><span class="team-score">-</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Columna 3 vacia (espacio para alinear con LB Semi) -->
+            <div class="ub-col ub-col-spacer"></div>
+
+            <!-- UB Final (Columna 4 - alineada con LB Final) -->
+            <div class="ub-col ub-col-final">
+                <div class="round-header">UB Final</div>
+                <div class="ub-final-match">
+                    <div class="match-box" id="ub-final">
+                        <div class="match-team"><span class="team-name">Gan. SF1</span><span class="team-score">-</span></div>
+                        <div class="match-team"><span class="team-name">Gan. SF2</span><span class="team-score">-</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Grand Final (Columna 5) -->
+            <div class="ub-col ub-col-gf">
+                <div class="round-header round-header--gold">Grand Final</div>
+                <div class="gf-match">
+                    <div class="match-box match-box--gold" id="grand-final">
+                        <div class="match-team"><span class="team-name">Ganador UB</span><span class="team-score">-</span></div>
+                        <div class="match-team"><span class="team-name">Ganador LB</span><span class="team-score">-</span></div>
+                    </div>
+                    <div class="grand-final-trophy">&#127942;</div>
+                </div>
+            </div>
+
+            <!-- SVG Connectors Upper Bracket -->
+            <svg class="ub-connectors" aria-hidden="true">
+                <!-- QF1+QF2 -> SF1 -->
+                <path class="conn-path" d="" id="conn-qf1-sf1"/>
+                <path class="conn-path" d="" id="conn-qf2-sf1"/>
+                <!-- QF3+QF4 -> SF2 -->
+                <path class="conn-path" d="" id="conn-qf3-sf2"/>
+                <path class="conn-path" d="" id="conn-qf4-sf2"/>
+                <!-- SF1+SF2 -> UB Final -->
+                <path class="conn-path" d="" id="conn-sf1-ubf"/>
+                <path class="conn-path" d="" id="conn-sf2-ubf"/>
+                <!-- UB Final -> Grand Final -->
+                <path class="conn-path conn-path--gold" d="" id="conn-ubf-gf"/>
             </svg>
         </div>
 
-        <!-- UB Final -->
-        <div class="bracket-round">
-            <div class="round-header">UB Final</div>
-            <div class="match-box">
-                <div class="match-team">
-                    <span class="team-name">Ganador SF1</span>
-                    <span class="team-score">-</span>
-                </div>
-                <div class="match-team">
-                    <span class="team-name">Ganador SF2</span>
-                    <span class="team-score">-</span>
-                </div>
-            </div>
+        <!-- ---- LOWER BRACKET ---- -->
+        <div class="bracket-label" style="margin-top: 48px;">
+            <span class="bracket-line bracket-line--red"></span>
+            <span class="bracket-label-text bracket-label-text--red">Lower Bracket</span>
         </div>
 
-        <!-- Connector UB Final -> Grand Final -->
-        <div class="connector">
-            <svg width="40" height="100" viewBox="0 0 40 100">
-                <path d="M0 50 H40" stroke="#334155" stroke-width="2" fill="none"/>
+        <div class="lower-bracket">
+            <!-- LB Ronda 1 (Columna 1) -->
+            <div class="lb-col lb-col-r1">
+                <div class="round-header">LB Ronda 1</div>
+                <div class="lb-r1-matches">
+                    <div class="match-box" id="lb-r1-1">
+                        <div class="match-team"><span class="team-name">Perd. QF1</span><span class="team-score">-</span></div>
+                        <div class="match-team"><span class="team-name">Perd. QF4</span><span class="team-score">-</span></div>
+                    </div>
+                    <div class="match-box" id="lb-r1-2">
+                        <div class="match-team"><span class="team-name">Perd. QF2</span><span class="team-score">-</span></div>
+                        <div class="match-team"><span class="team-name">Perd. QF3</span><span class="team-score">-</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LB Ronda 2 (Columna 2) -->
+            <div class="lb-col lb-col-r2">
+                <div class="round-header">LB Ronda 2</div>
+                <div class="lb-r2-matches">
+                    <div class="match-box" id="lb-r2-1">
+                        <div class="match-team"><span class="team-name">Gan. LBR1-1</span><span class="team-score">-</span></div>
+                        <div class="match-team"><span class="team-name">Perd. SF2</span><span class="team-score">-</span></div>
+                    </div>
+                    <div class="match-box" id="lb-r2-2">
+                        <div class="match-team"><span class="team-name">Gan. LBR1-2</span><span class="team-score">-</span></div>
+                        <div class="match-team"><span class="team-name">Perd. SF1</span><span class="team-score">-</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LB Semifinal (Columna 3) -->
+            <div class="lb-col lb-col-semi">
+                <div class="round-header">LB Semifinal</div>
+                <div class="lb-semi-match">
+                    <div class="match-box" id="lb-semi">
+                        <div class="match-team"><span class="team-name">Gan. LBR2-1</span><span class="team-score">-</span></div>
+                        <div class="match-team"><span class="team-name">Gan. LBR2-2</span><span class="team-score">-</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LB Final (Columna 4 - alineada con UB Final) -->
+            <div class="lb-col lb-col-final">
+                <div class="round-header">LB Final</div>
+                <div class="lb-final-match">
+                    <div class="match-box" id="lb-final">
+                        <div class="match-team"><span class="team-name">Gan. LB Semi</span><span class="team-score">-</span></div>
+                        <div class="match-team"><span class="team-name">Perd. UB Final</span><span class="team-score">-</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Columna 5 vacia (espacio para alinear con Grand Final) -->
+            <div class="lb-col lb-col-spacer"></div>
+
+            <!-- SVG Connectors Lower Bracket -->
+            <svg class="lb-connectors" aria-hidden="true">
+                <!-- R1 -> R2 -->
+                <path class="conn-path" d="" id="conn-lb-r1-1-r2-1"/>
+                <path class="conn-path" d="" id="conn-lb-r1-2-r2-2"/>
+                <!-- R2 -> Semi -->
+                <path class="conn-path" d="" id="conn-lb-r2-semi-top"/>
+                <path class="conn-path" d="" id="conn-lb-r2-semi-bot"/>
+                <!-- Semi -> Final -->
+                <path class="conn-path" d="" id="conn-lb-semi-final"/>
             </svg>
         </div>
+    </section>
 
-        <!-- Grand Final -->
-        <div class="bracket-round grand-final-round">
-            <div class="round-header round-header--gold">Grand Final</div>
-            <div class="match-box match-box--gold">
-                <div class="match-team">
-                    <span class="team-name">Ganador UB</span>
-                    <span class="team-score">-</span>
-                </div>
-                <div class="match-team">
-                    <span class="team-name">Ganador LB</span>
-                    <span class="team-score">-</span>
-                </div>
-            </div>
-            <div class="grand-final-trophy">&#127942;</div>
-        </div>
-    </div>
+    <!-- Bracket Connector Script -->
+    <script>
+    function drawConnectors() {
+        // Helper: get element position relative to a container
+        function getPos(el, containerRect) {
+            var r = el.getBoundingClientRect();
+            return {
+                left: r.left - containerRect.left,
+                right: r.right - containerRect.left,
+                top: r.top - containerRect.top,
+                bottom: r.bottom - containerRect.top,
+                midY: (r.top + r.bottom) / 2 - containerRect.top
+            };
+        }
 
-    <!-- ---- LOWER BRACKET ---- -->
-    <div class="bracket-label" style="margin-top: 40px;">
-        <span class="bracket-line bracket-line--red"></span>
-        <span class="bracket-label-text bracket-label-text--red">Lower Bracket</span>
-    </div>
+        // Helper: set path d attribute
+        function setPath(id, d) {
+            var el = document.getElementById(id);
+            if (el) el.setAttribute('d', d);
+        }
 
-    <div class="bracket-container">
-        <!-- LB Ronda 1 -->
-        <div class="bracket-round">
-            <div class="round-header">LB Ronda 1</div>
-            <div class="match-box">
-                <div class="match-team">
-                    <span class="team-name">Perdedor SF1</span>
-                    <span class="team-score">-</span>
-                </div>
-                <div class="match-team">
-                    <span class="team-name">Perdedor SF2</span>
-                    <span class="team-score">-</span>
-                </div>
-            </div>
-        </div>
+        // Helper: draw L-shaped bracket connector from source right to target left
+        // Goes: horizontal from source right -> midX, then vertical to target midY, then horizontal to target left
+        function bracketPath(src, tgt) {
+            var midX = (src.right + tgt.left) / 2;
+            return 'M' + src.right + ',' + src.midY +
+                   ' H' + midX +
+                   ' V' + tgt.midY +
+                   ' H' + tgt.left;
+        }
 
-        <!-- Connector LB R1 -> LB Final -->
-        <div class="connector">
-            <svg width="40" height="100" viewBox="0 0 40 100">
-                <path d="M0 50 H40" stroke="#334155" stroke-width="2" fill="none"/>
-            </svg>
-        </div>
+        // Helper: draw straight horizontal line
+        function straightPath(src, tgt) {
+            return 'M' + src.right + ',' + src.midY +
+                   ' H' + tgt.left;
+        }
 
-        <!-- LB Final -->
-        <div class="bracket-round">
-            <div class="round-header">LB Final</div>
-            <div class="match-box">
-                <div class="match-team">
-                    <span class="team-name">Ganador LB R1</span>
-                    <span class="team-score">-</span>
-                </div>
-                <div class="match-team">
-                    <span class="team-name">Perdedor UB Final</span>
-                    <span class="team-score">-</span>
-                </div>
-            </div>
-        </div>
+        // --- UPPER BRACKET ---
+        var ubContainer = document.querySelector('.upper-bracket');
+        if (!ubContainer) return;
+        var ubSvg = ubContainer.querySelector('.ub-connectors');
+        var ubRect = ubContainer.getBoundingClientRect();
 
-        <!-- Connector LB Final -> up to Grand Final -->
-        <div class="connector">
-            <svg width="40" height="100" viewBox="0 0 40 100">
-                <path d="M0 50 H20 V0" stroke="#334155" stroke-width="2" fill="none"/>
-            </svg>
-        </div>
-    </div>
-</section>
+        ubSvg.setAttribute('width', ubRect.width);
+        ubSvg.setAttribute('height', ubRect.height);
+        ubSvg.style.width = ubRect.width + 'px';
+        ubSvg.style.height = ubRect.height + 'px';
+
+        var qf1 = getPos(document.getElementById('ub-qf1'), ubRect);
+        var qf2 = getPos(document.getElementById('ub-qf2'), ubRect);
+        var qf3 = getPos(document.getElementById('ub-qf3'), ubRect);
+        var qf4 = getPos(document.getElementById('ub-qf4'), ubRect);
+        var sf1 = getPos(document.getElementById('ub-sf1'), ubRect);
+        var sf2 = getPos(document.getElementById('ub-sf2'), ubRect);
+        var ubf = getPos(document.getElementById('ub-final'), ubRect);
+        var gf  = getPos(document.getElementById('grand-final'), ubRect);
+
+        // QF1 -> SF1 (L-shape)
+        setPath('conn-qf1-sf1', bracketPath(qf1, sf1));
+        // QF2 -> SF1 (L-shape)
+        setPath('conn-qf2-sf1', bracketPath(qf2, sf1));
+        // QF3 -> SF2 (L-shape)
+        setPath('conn-qf3-sf2', bracketPath(qf3, sf2));
+        // QF4 -> SF2 (L-shape)
+        setPath('conn-qf4-sf2', bracketPath(qf4, sf2));
+        // SF1 -> UB Final (L-shape)
+        setPath('conn-sf1-ubf', bracketPath(sf1, ubf));
+        // SF2 -> UB Final (L-shape)
+        setPath('conn-sf2-ubf', bracketPath(sf2, ubf));
+        // UB Final -> Grand Final (dashed gold, horizontal)
+        setPath('conn-ubf-gf', 'M' + ubf.right + ',' + ubf.midY + ' H' + gf.left);
+
+        // --- LOWER BRACKET ---
+        var lbContainer = document.querySelector('.lower-bracket');
+        if (!lbContainer) return;
+        var lbSvg = lbContainer.querySelector('.lb-connectors');
+        var lbRect = lbContainer.getBoundingClientRect();
+
+        lbSvg.setAttribute('width', lbRect.width);
+        lbSvg.setAttribute('height', lbRect.height);
+        lbSvg.style.width = lbRect.width + 'px';
+        lbSvg.style.height = lbRect.height + 'px';
+
+        var lbr11 = getPos(document.getElementById('lb-r1-1'), lbRect);
+        var lbr12 = getPos(document.getElementById('lb-r1-2'), lbRect);
+        var lbr21 = getPos(document.getElementById('lb-r2-1'), lbRect);
+        var lbr22 = getPos(document.getElementById('lb-r2-2'), lbRect);
+        var lbSemi = getPos(document.getElementById('lb-semi'), lbRect);
+        var lbFinal = getPos(document.getElementById('lb-final'), lbRect);
+
+        // R1-1 -> R2-1 (straight horizontal)
+        setPath('conn-lb-r1-1-r2-1', straightPath(lbr11, lbr21));
+        // R1-2 -> R2-2 (straight horizontal)
+        setPath('conn-lb-r1-2-r2-2', straightPath(lbr12, lbr22));
+        // R2-1 -> Semi (L-shape merge)
+        setPath('conn-lb-r2-semi-top', bracketPath(lbr21, lbSemi));
+        // R2-2 -> Semi (L-shape merge)
+        setPath('conn-lb-r2-semi-bot', bracketPath(lbr22, lbSemi));
+        // Semi -> Final (straight horizontal)
+        setPath('conn-lb-semi-final', straightPath(lbSemi, lbFinal));
+    }
+
+    window.addEventListener('load', drawConnectors);
+    window.addEventListener('resize', drawConnectors);
+    </script>
 
 <!-- ================= FOOTER ================= -->
 <footer class="site-footer">
@@ -312,8 +449,6 @@
 
 </body>
 </html>
-
-
 
 
 
