@@ -1,0 +1,562 @@
+/* =====================================================
+   3er Torneo de Papa Doom - Dota 2
+   ===================================================== */
+
+/* ---- RESET ---- */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ---- VARIABLES ---- */
+:root {
+    --bg: #0f172a;
+    --bg-card: #020617;
+    --primary: #38bdf8;
+    --accent: #facc15;
+    --red: #ef4444;
+    --border: #1e293b;
+    --text: #e2e8f0;
+    --text-muted: #94a3b8;
+    --secondary: #1e293b;
+    --radius: 10px;
+}
+
+/* ---- BASE ---- */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+}
+
+/* ---- BACKGROUND GLOBAL ---- */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background:
+        url('img/dota-bg.jpg') center/cover no-repeat fixed;
+    opacity: 0.15;
+}
+
+body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background: radial-gradient(ellipse at 30% 20%, rgba(56, 189, 248, 0.06) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 80%, rgba(250, 204, 21, 0.04) 0%, transparent 60%);
+}
+
+/* ==========================================
+   HERO
+   ========================================== */
+.hero {
+    position: relative;
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.hero-bg {
+    position: absolute;
+    inset: 0;
+    background: url('img/dota-bg.jpg') center/cover no-repeat;
+    opacity: 0.3;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg,
+        rgba(15, 23, 42, 0.5) 0%,
+        rgba(2, 6, 23, 0.92) 100%
+    );
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 40px 24px;
+    max-width: 640px;
+}
+
+.badge {
+    display: inline-block;
+    background: var(--secondary);
+    color: var(--primary);
+    border: 1px solid var(--border);
+    padding: 6px 18px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    margin-bottom: 20px;
+}
+
+.hero-title {
+    font-family: 'Rajdhani', 'Segoe UI', sans-serif;
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 700;
+    color: var(--primary);
+    line-height: 1.1;
+    margin-bottom: 8px;
+    text-wrap: balance;
+}
+
+.dota-label {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 24px;
+}
+
+.dota-logo {
+    width: 36px;
+    height: 36px;
+}
+
+/* ---- Prize Pool ---- */
+.prize-pool {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 28px;
+    background: rgba(250, 204, 21, 0.08);
+    border: 1px solid rgba(250, 204, 21, 0.25);
+    border-radius: var(--radius);
+    padding: 16px 32px;
+    display: inline-flex;
+}
+
+.prize-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+    text-transform: uppercase;
+}
+
+.prize-amount {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+}
+
+.hero-description {
+    color: var(--text-muted);
+    max-width: 480px;
+    margin: 0 auto 24px;
+    line-height: 1.6;
+}
+
+.hero-cta {
+    display: inline-block;
+    background: rgba(56, 189, 248, 0.08);
+    border: 1px solid rgba(56, 189, 248, 0.25);
+    color: var(--primary);
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 12px 28px;
+    border-radius: var(--radius);
+    margin-bottom: 16px;
+    letter-spacing: 0.02em;
+}
+
+.hero-date {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+}
+
+.hero-link {
+    display: inline-block;
+    color: var(--primary);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+.hero-link:hover {
+    opacity: 1;
+    text-decoration: underline;
+}
+
+/* ==========================================
+   POSTER / ORGANIZADOR
+   ========================================== */
+.poster-section {
+    padding: 50px 24px;
+}
+
+.poster-container {
+    max-width: 440px;
+    margin: 0 auto;
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 2px solid var(--border);
+    transition: border-color 0.3s;
+}
+.poster-container:hover {
+    border-color: var(--primary);
+}
+
+.poster-img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.poster-caption {
+    background: var(--bg-card);
+    text-align: center;
+    padding: 12px;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+}
+
+/* ==========================================
+   DIVIDER
+   ========================================== */
+.divider {
+    max-width: 900px;
+    margin: 0 auto;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+}
+
+/* ==========================================
+   SECTION TITLE
+   ========================================== */
+.section-title {
+    text-align: center;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 32px;
+}
+
+/* ==========================================
+   FASE DE GRUPOS
+   ========================================== */
+.groups-section {
+    padding: 50px 24px;
+}
+
+.groups {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+@media (max-width: 900px) {
+    .groups {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 500px) {
+    .groups {
+        grid-template-columns: 1fr;
+        max-width: 360px;
+    }
+}
+
+.team-panel {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+
+.team-panel:hover {
+    border-color: var(--primary);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(56, 189, 248, 0.08);
+}
+
+.team-header {
+    background: var(--secondary);
+    padding: 10px 14px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.team-icon {
+    font-size: 0.8rem;
+    opacity: 0.7;
+}
+
+.player {
+    padding: 8px 14px;
+    font-size: 0.85rem;
+    color: rgba(226, 232, 240, 0.8);
+    border-bottom: 1px solid rgba(15, 23, 42, 0.6);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.player:last-child {
+    border-bottom: none;
+}
+
+.player-num {
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--secondary);
+    color: var(--text-muted);
+    font-size: 0.7rem;
+    font-weight: 600;
+    flex-shrink: 0;
+}
+
+/* ==========================================
+   PLAYOFFS
+   ========================================== */
+.playoffs-section {
+    padding: 50px 24px;
+}
+
+/* ---- Bracket Label ---- */
+.bracket-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    max-width: 1000px;
+    margin: 0 auto 20px;
+}
+
+.bracket-line {
+    display: block;
+    width: 24px;
+    height: 3px;
+    border-radius: 2px;
+}
+.bracket-line--primary { background: var(--primary); }
+.bracket-line--red { background: var(--red); }
+
+.bracket-label-text {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+}
+.bracket-label-text--primary { color: var(--primary); }
+.bracket-label-text--red { color: var(--red); }
+
+/* ---- Bracket Container ---- */
+.bracket-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    overflow-x: auto;
+    padding-bottom: 16px;
+}
+
+/* ---- Bracket Round ---- */
+.bracket-round {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-width: 210px;
+    position: relative;
+}
+
+.grand-final-round {
+    min-width: 220px;
+}
+
+.grand-final-trophy {
+    text-align: center;
+    font-size: 2rem;
+    margin-top: 4px;
+}
+
+/* ---- Round Header ---- */
+.round-header {
+    text-align: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(30, 41, 59, 0.5);
+}
+
+.round-header--gold {
+    color: var(--accent);
+    border-bottom-color: rgba(250, 204, 21, 0.3);
+}
+
+/* ---- Match Box ---- */
+.match-box {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    transition: border-color 0.25s;
+}
+
+.match-box:hover {
+    border-color: var(--primary);
+}
+
+.match-box--gold {
+    border-color: rgba(250, 204, 21, 0.4);
+}
+.match-box--gold:hover {
+    border-color: var(--accent);
+}
+
+.match-team {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+    font-size: 0.85rem;
+    color: rgba(226, 232, 240, 0.7);
+    transition: background 0.2s;
+}
+
+.match-team:first-child {
+    border-bottom: 1px solid rgba(30, 41, 59, 0.4);
+}
+
+.match-team.winner {
+    background: rgba(56, 189, 248, 0.08);
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.team-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 150px;
+}
+
+.team-score {
+    min-width: 24px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    background: rgba(30, 41, 59, 0.5);
+    border-radius: 4px;
+    padding: 2px 6px;
+}
+
+.match-team.winner .team-score {
+    background: rgba(56, 189, 248, 0.15);
+    color: var(--primary);
+}
+
+/* ---- SVG Connectors ---- */
+.connector {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+}
+
+/* Hide connectors on mobile */
+@media (max-width: 768px) {
+    .connector {
+        display: none;
+    }
+
+    .bracket-container {
+        flex-direction: column;
+        gap: 24px;
+        align-items: stretch;
+    }
+
+    .bracket-round {
+        min-width: auto;
+    }
+}
+
+/* ==========================================
+   FOOTER
+   ========================================== */
+.site-footer {
+    text-align: center;
+    padding: 32px 24px;
+    border-top: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+
+.footer-sub {
+    font-size: 0.75rem;
+    margin-top: 4px;
+    opacity: 0.6;
+}
+
+.footer-sub a {
+    color: var(--primary);
+    text-decoration: none;
+}
+.footer-sub a:hover {
+    text-decoration: underline;
+}
+
+/* ==========================================
+   SCROLLBAR
+   ========================================== */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--secondary);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #334155;
+}
