@@ -256,7 +256,7 @@ body::after {
 .section-title {
     text-align: center;
     font-family: 'Rajdhani', sans-serif;
-    font-size: 2rem;
+    font-size: 4rem;
     font-weight: 700;
     color: var(--primary);
     margin-bottom: 32px;
@@ -369,7 +369,7 @@ body::after {
     display: flex;
     align-items: center;
     gap: 10px;
-    max-width: 1000px;
+    max-width: 1300px;
     margin: 0 auto 20px;
 }
 
@@ -391,35 +391,6 @@ body::after {
 .bracket-label-text--primary { color: var(--primary); }
 .bracket-label-text--red { color: var(--red); }
 
-/* ---- Bracket Container ---- */
-.bracket-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0;
-    overflow-x: auto;
-    padding-bottom: 16px;
-}
-
-/* ---- Bracket Round ---- */
-.bracket-round {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    min-width: 210px;
-    position: relative;
-}
-
-.grand-final-round {
-    min-width: 220px;
-}
-
-.grand-final-trophy {
-    text-align: center;
-    font-size: 2rem;
-    margin-top: 4px;
-}
-
 /* ---- Round Header ---- */
 .round-header {
     text-align: center;
@@ -429,6 +400,7 @@ body::after {
     text-transform: uppercase;
     letter-spacing: 0.1em;
     padding-bottom: 8px;
+    margin-bottom: 12px;
     border-bottom: 1px solid rgba(30, 41, 59, 0.5);
 }
 
@@ -444,6 +416,7 @@ body::after {
     border-radius: 6px;
     overflow: hidden;
     transition: border-color 0.25s;
+    width: 200px;
 }
 
 .match-box:hover {
@@ -481,7 +454,7 @@ body::after {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    max-width: 150px;
+    max-width: 140px;
 }
 
 .team-score {
@@ -500,27 +473,168 @@ body::after {
     color: var(--primary);
 }
 
-/* ---- SVG Connectors ---- */
-.connector {
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
+.grand-final-trophy {
+    text-align: center;
+    font-size: 2rem;
+    margin-top: 8px;
 }
 
-/* Hide connectors on mobile */
-@media (max-width: 768px) {
-    .connector {
+/* ==========================================
+   UPPER BRACKET - 5-Column Grid Layout
+   ========================================== */
+.upper-bracket {
+    position: relative;
+    display: grid;
+    grid-template-columns: 200px 200px 200px 200px 200px;
+    column-gap: 60px;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding-bottom: 16px;
+    overflow-x: auto;
+}
+
+.ub-col {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Columna vacia (espacio entre SF y UB Final) */
+.ub-col-spacer {
+    min-height: 1px;
+}
+
+/* QF: 4 matches stacked with spacing */
+.ub-qf-matches {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    flex: 1;
+}
+
+/* SF: 2 matches vertically centered, spaced to align between QF pairs */
+.ub-sf-matches {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    flex: 1;
+    gap: 20px;
+    padding: 25px 0;
+}
+
+/* UB Final: single match vertically centered */
+.ub-final-match {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+}
+
+/* Grand Final: single match vertically centered */
+.gf-match {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+}
+
+/* SVG overlay for connectors */
+.ub-connectors,
+.lb-connectors {
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.conn-path {
+    stroke: #334155;
+    stroke-width: 1.5;
+    fill: none;
+}
+
+.conn-path--gold {
+    stroke: #facc15;
+    stroke-width: 1.5;
+    stroke-dasharray: 5 4;
+    fill: none;
+}
+
+/* ==========================================
+   LOWER BRACKET - 5-Column Grid Layout
+   ========================================== */
+.lower-bracket {
+    position: relative;
+    display: grid;
+    grid-template-columns: 200px 200px 200px 200px 200px;
+    column-gap: 60px;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding-bottom: 16px;
+    overflow-x: auto;
+}
+
+.lb-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.lb-col-spacer {
+    min-height: 1px;
+}
+
+.lb-r1-matches,
+.lb-r2-matches {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    flex: 1;
+}
+
+.lb-semi-match,
+.lb-final-match {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+}
+
+/* ---- Responsive Mobile ---- */
+@media (max-width: 900px) {
+    .upper-bracket,
+    .lower-bracket {
+        grid-template-columns: 1fr;
+        column-gap: 0;
+        row-gap: 24px;
+    }
+
+    .ub-col-spacer,
+    .lb-col-spacer {
         display: none;
     }
 
-    .bracket-container {
-        flex-direction: column;
-        gap: 24px;
-        align-items: stretch;
+    .ub-connectors,
+    .lb-connectors {
+        display: none;
     }
 
-    .bracket-round {
-        min-width: auto;
+    .match-box {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .ub-qf-matches,
+    .ub-sf-matches,
+    .lb-r1-matches,
+    .lb-r2-matches {
+        padding: 0;
+    }
+
+    .gf-match {
+        align-items: flex-start;
     }
 }
 
