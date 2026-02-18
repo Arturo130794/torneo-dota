@@ -335,8 +335,8 @@ body::after {
 }
 
 .player-num {
-    width: 22px;
-    height: 22px;
+    width: 24px;
+    height: 24px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -346,6 +346,15 @@ body::after {
     font-size: 0.7rem;
     font-weight: 600;
     flex-shrink: 0;
+    overflow: hidden;
+}
+
+.player-num img {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+    filter: invert(1) brightness(1.8) contrast(0.9);
+    opacity: 0.85;
 }
 
 /* ==========================================
@@ -560,3 +569,4 @@ body::after {
 ::-webkit-scrollbar-thumb:hover {
     background: #334155;
 }
+
