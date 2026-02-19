@@ -113,7 +113,7 @@
                 <span class="team-icon">&#9876;</span> Team 4
             </div>
             <div class="player"><span class="player-num"><img src="img/pos1.png"></span> 15 years</div>
-            <div class="player"><span class="player-num"><img src="img/pos2.png"></span> Mazamorra 2</div>
+            <div class="player"><span class="player-num"><img src="img/pos2.png"></span> Mazamorra</div>
             <div class="player"><span class="player-num"><img src="img/pos3.png"></span> Tatto</div>
             <div class="player"><span class="player-num"><img src="img/pos4.png"></span> Fidel</div>
             <div class="player"><span class="player-num"><img src="img/pos5.png"></span> Ternasor</div>
@@ -231,17 +231,8 @@
                 </div>
             </div>
 
-            <!-- Grand Final (Columna 5) -->
-            <div class="ub-col ub-col-gf">
-                <div class="round-header round-header--gold">Grand Final</div>
-                <div class="gf-match">
-                    <div class="match-box match-box--gold" id="grand-final">
-                        <div class="match-team"><span class="team-name">Ganador UB</span><span class="team-score">-</span></div>
-                        <div class="match-team"><span class="team-name">Ganador LB</span><span class="team-score">-</span></div>
-                    </div>
-                    <div class="grand-final-trophy">&#127942;</div>
-                </div>
-            </div>
+            <!-- Columna 5 vacia (Grand Final se mueve fuera) -->
+            <div class="ub-col ub-col-spacer"></div>
 
             <!-- SVG Connectors Upper Bracket -->
             <svg class="ub-connectors" aria-hidden="true">
@@ -254,10 +245,39 @@
                 <!-- SF1+SF2 -> UB Final -->
                 <path class="conn-path" d="" id="conn-sf1-ubf"/>
                 <path class="conn-path" d="" id="conn-sf2-ubf"/>
-                <!-- UB Final -> Grand Final -->
-                <path class="conn-path conn-path--gold" d="" id="conn-ubf-gf"/>
             </svg>
         </div>
+
+        <!-- ---- GRAND FINAL + CAMPEON (entre UB y LB) ---- -->
+        <!-- Usa el mismo grid de 5 columnas para alinear GF con col 4 y Campeon con col 5 -->
+        <div class="grand-final-section" id="gf-section">
+            <div class="gf-spacer"></div>
+            <div class="gf-spacer"></div>
+            <div class="gf-spacer"></div>
+            <div class="gf-col">
+                <div class="round-header round-header--gold">Grand Final</div>
+                <div class="match-box match-box--gold" id="grand-final">
+                    <div class="match-team"><span class="team-name">Ganador UB</span><span class="team-score">-</span></div>
+                    <div class="match-team"><span class="team-name">Ganador LB</span><span class="team-score">-</span></div>
+                </div>
+            </div>
+            <div class="gf-col">
+                <div class="round-header round-header--champion">Campeon</div>
+                <div class="champion-box" id="champion-box">
+                    <div class="champion-team">
+                        <span class="champion-trophy">&#127942;</span>
+                        <span class="champion-name">Por definir</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SVG Connectors globales: UB Final -> GF, LB Final -> GF, GF -> Campeon -->
+        <svg class="global-connectors" id="global-connectors" aria-hidden="true">
+            <path class="conn-path conn-path--gold" d="" id="conn-ubf-gf"/>
+            <path class="conn-path conn-path--gold" d="" id="conn-lbf-gf"/>
+            <path class="conn-path conn-path--gold" d="" id="conn-gf-champion"/>
+        </svg>
 
         <!-- ---- LOWER BRACKET ---- -->
         <div class="bracket-label" style="margin-top: 48px;">
@@ -390,7 +410,6 @@
         var sf1 = getPos(document.getElementById('ub-sf1'), ubRect);
         var sf2 = getPos(document.getElementById('ub-sf2'), ubRect);
         var ubf = getPos(document.getElementById('ub-final'), ubRect);
-        var gf  = getPos(document.getElementById('grand-final'), ubRect);
 
         // QF1 -> SF1 (L-shape)
         setPath('conn-qf1-sf1', bracketPath(qf1, sf1));
@@ -404,8 +423,6 @@
         setPath('conn-sf1-ubf', bracketPath(sf1, ubf));
         // SF2 -> UB Final (L-shape)
         setPath('conn-sf2-ubf', bracketPath(sf2, ubf));
-        // UB Final -> Grand Final (dashed gold, horizontal)
-        setPath('conn-ubf-gf', 'M' + ubf.right + ',' + ubf.midY + ' H' + gf.left);
 
         // --- LOWER BRACKET ---
         var lbContainer = document.querySelector('.lower-bracket');
@@ -435,6 +452,57 @@
         setPath('conn-lb-r2-semi-bot', bracketPath(lbr22, lbSemi));
         // Semi -> Final (straight horizontal)
         setPath('conn-lb-semi-final', straightPath(lbSemi, lbFinal));
+
+        // --- GLOBAL CONNECTORS (UB Final -> GF, LB Final -> GF, GF -> Champion) ---
+        var playoffsSection = document.querySelector('.playoffs-section');
+        if (!playoffsSection) return;
+        var globalSvg = document.getElementById('global-connectors');
+        var pRect = playoffsSection.getBoundingClientRect();
+
+        function getPosGlobal(el) {
+            var r = el.getBoundingClientRect();
+            return {
+                left: r.left - pRect.left,
+                right: r.right - pRect.left,
+                top: r.top - pRect.top,
+                bottom: r.bottom - pRect.top,
+                midY: (r.top + r.bottom) / 2 - pRect.top,
+                midX: (r.left + r.right) / 2 - pRect.left
+            };
+        }
+
+        globalSvg.setAttribute('width', pRect.width);
+        globalSvg.setAttribute('height', pRect.height);
+        globalSvg.style.width = pRect.width + 'px';
+        globalSvg.style.height = pRect.height + 'px';
+
+        var ubFinalG = getPosGlobal(document.getElementById('ub-final'));
+        var lbFinalG = getPosGlobal(document.getElementById('lb-final'));
+        var gfG = getPosGlobal(document.getElementById('grand-final'));
+        var champG = getPosGlobal(document.getElementById('champion-box'));
+
+        // Ambos UB Final y GF estan en la misma columna (col 4),
+        // asi que el conector va: desde el fondo de UB Final, baja vertical, llega al midY de GF
+        // Usamos midX de GF como referencia ya que estan alineados
+        var colMidX = gfG.midX;
+
+        // UB Final -> Grand Final: sale del fondo de UB Final, baja hasta el tope de GF
+        setPath('conn-ubf-gf',
+            'M' + colMidX + ',' + ubFinalG.bottom +
+            ' V' + gfG.top
+        );
+
+        // LB Final -> Grand Final: sale del tope de LB Final, sube hasta el fondo de GF
+        setPath('conn-lbf-gf',
+            'M' + colMidX + ',' + gfG.bottom +
+            ' V' + lbFinalG.top
+        );
+
+        // Grand Final -> Champion (horizontal desde el lado derecho de GF al lado izquierdo de Champion)
+        setPath('conn-gf-champion',
+            'M' + gfG.right + ',' + gfG.midY +
+            ' H' + champG.left
+        );
     }
 
     window.addEventListener('load', drawConnectors);
@@ -449,6 +517,3 @@
 
 </body>
 </html>
-
-
-
