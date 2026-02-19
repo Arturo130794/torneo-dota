@@ -361,6 +361,7 @@ body::after {
    PLAYOFFS
    ========================================== */
 .playoffs-section {
+    position: relative;
     padding: 50px 24px;
 }
 
@@ -473,11 +474,74 @@ body::after {
     color: var(--primary);
 }
 
-.grand-final-trophy {
-    text-align: center;
-    font-size: 2rem;
-    margin-top: 8px;
+/* ==========================================
+   GRAND FINAL SECTION (entre UB y LB)
+   Usa el mismo grid de 5 columnas para alinear
+   GF con columna 4 y Campeon con columna 5
+   ========================================== */
+.grand-final-section {
+    position: relative;
+    display: grid;
+    grid-template-columns: 200px 200px 200px 200px 200px;
+    column-gap: 60px;
+    max-width: 1300px;
+    margin: 32px auto;
+    align-items: center;
 }
+
+.gf-spacer {
+    /* Columnas vacias 1-3 para alinear */
+}
+
+.gf-col {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Champion box */
+.round-header--champion {
+    color: var(--accent);
+    border-bottom-color: rgba(250, 204, 21, 0.3);
+}
+
+.champion-box {
+    background: var(--bg-card);
+    border: 2px solid rgba(250, 204, 21, 0.5);
+    border-radius: 6px;
+    overflow: hidden;
+    width: 200px;
+}
+
+.champion-team {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 14px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--accent);
+}
+
+.champion-trophy {
+    font-size: 1.4rem;
+}
+
+.champion-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* SVG Connectors Globales */
+.global-connectors {
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 2;
+}
+
+
 
 /* ==========================================
    UPPER BRACKET - 5-Column Grid Layout
@@ -617,8 +681,23 @@ body::after {
     }
 
     .ub-connectors,
-    .lb-connectors {
+    .lb-connectors,
+    .global-connectors {
         display: none;
+    }
+
+    .grand-final-section {
+        grid-template-columns: 1fr;
+        row-gap: 24px;
+    }
+
+    .gf-spacer {
+        display: none;
+    }
+
+    .champion-box {
+        width: 100%;
+        max-width: 300px;
     }
 
     .match-box {
@@ -683,4 +762,3 @@ body::after {
 ::-webkit-scrollbar-thumb:hover {
     background: #334155;
 }
-
